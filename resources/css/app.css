@@ -1,0 +1,147 @@
+@import 'tailwindcss';
+@import './toasts.css';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+
+    /* Paleta da Igreja Evangélica Calvário, extraída do logotipo institucional. */
+    --color-brand-50: #fff7ed;
+    --color-brand-100: #ffedd5;
+    --color-brand-200: #fed7aa;
+    --color-brand-300: #fdba74;
+    --color-brand-400: #ff9030;
+    --color-brand-500: #ff7020;
+    --color-brand-600: #f06010;
+    --color-brand-700: #f04000;
+    --color-brand-800: #c93400;
+    --color-brand-900: #9f2d0b;
+    --color-brand-950: #561405;
+    --color-brand-yellow: #ffe52b;
+}
+
+/* Ajusta o login à altura disponível, inclusive em notebooks e celulares. */
+.login-panel {
+    padding-block: clamp(0.75rem, 3dvh, 3rem);
+}
+
+.login-logo {
+    width: clamp(4rem, 14dvh, 8rem);
+}
+
+.login-heading {
+    margin-bottom: clamp(1rem, 3dvh, 2rem);
+}
+
+.login-form {
+    gap: clamp(0.75rem, 2.5dvh, 1.25rem);
+}
+
+@media (min-width: 64rem) {
+    .login-brand {
+        gap: clamp(1rem, 4dvh, 2.5rem);
+    }
+
+    .login-logo {
+        width: min(100%, 44dvh, 28rem);
+    }
+
+    .login-logo img {
+        max-height: 38dvh;
+    }
+}
+
+@media (min-width: 48rem) and (max-height: 40rem) {
+    .login-layout {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: 1fr;
+    }
+}
+
+.login-material-field {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    --md-filled-text-field-container-color: #f5f5f4;
+    --md-filled-text-field-container-shape: 0.75rem 0.75rem 0 0;
+    --md-filled-text-field-focus-active-indicator-color: #f04000;
+    --md-filled-text-field-focus-label-text-color: #f04000;
+    --md-filled-text-field-hover-active-indicator-color: #ff9030;
+    --md-filled-text-field-input-text-color: #1c1917;
+    --md-filled-text-field-input-text-font: var(--font-sans);
+    --md-filled-text-field-label-text-color: #57534e;
+    --md-filled-text-field-label-text-font: var(--font-sans);
+    --md-filled-text-field-supporting-text-font: var(--font-sans);
+}
+
+/* Keep the existing label space so fields, selects and action buttons stay aligned. */
+.form-floating {
+    --floating-label-left: 0.75rem;
+    --floating-label-right: 0.75rem;
+    --floating-label-offset: 2.5rem;
+    min-width: 0;
+}
+
+.form-floating-icon { --floating-label-left: 2.75rem; }
+.form-floating-icon-tight { --floating-label-left: 2.5rem; }
+.form-floating-password { --floating-label-right: 2.75rem; }
+.form-floating-large {
+    --floating-label-left: 3rem;
+    --floating-label-right: 3rem;
+    --floating-label-offset: 2.625rem;
+}
+
+.form-floating-label {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: text;
+    transform-origin: left top;
+    transition: transform 180ms ease, color 180ms ease;
+}
+
+.form-floating:has(.form-floating-control:placeholder-shown:not(:focus):not(:autofill):not([readonly])) .form-floating-label {
+    max-width: calc(100% - var(--floating-label-left) - var(--floating-label-right));
+    transform: translate(var(--floating-label-left), var(--floating-label-offset));
+    color: var(--color-stone-500);
+    font-weight: 400;
+}
+
+.form-floating-control:not(:focus):not([readonly])::placeholder {
+    color: transparent;
+}
+
+/* Search boxes in dropdowns keep their compact height and float the label inside. */
+.form-floating-search {
+    --floating-label-left: 2.25rem;
+    --floating-label-offset: 0.625rem;
+    position: relative;
+}
+
+.form-floating-search .form-floating-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-width: calc(100% - 3rem);
+    transform: translate(2.25rem, 0.0625rem) scale(0.75);
+    pointer-events: none;
+}
+
+.form-floating-search .form-floating-control:is(:focus, :not(:placeholder-shown)) {
+    padding-top: 0.75rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .form-floating-label { transition: none; }
+}
